@@ -5,7 +5,7 @@
   "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon cookie/app.cookie.js"
+    "dev": "nodemon session/app.session.js"
   },
   "author": "",
   "license": "ISC",
