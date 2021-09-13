@@ -2,7 +2,7 @@ const express      = require("express");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-app.use(cookieParser());
+app.use(cookieParser("23423456325659562@!@#!@#"));
 
 
 let products = {
@@ -23,9 +23,27 @@ app.get("/products", (req, res) => {
     res.send(output);
 });
 
+app.get("/cart/:id", (req, res) => {
+    let id = req.params.id;
+    let cart;
+    /**
+     * cart = {
+     *  1: 1 //제품 id, 카트에 담긴 제품 수
+     * }
+    */
+
+    if(req.signedCookies.cart) cart = req.signedCookies.cart;
+    else cart = {};
+
+    if(!cart[id]) cart[id] = 0;
+    cart[id] = parseInt(cart[id]) + 1;
+
+    res.cookie("cart", cart, {signed: true});
+    res.redirect("/cart");
+});
 
 app.get("/cart", (req, res) => {
-    let cart = req.cookies.cart;
+    let cart = req.signedCookies.cart;
     let output = "<h1>Cart</h1> <ul>";
 
     if(!cart) res.render("Empty!");
@@ -38,35 +56,16 @@ app.get("/cart", (req, res) => {
     res.send(output);
 });
 
-app.get("/cart/:id", (req, res) => {
-    let id = req.params.id;
-    let cart;
-    /**
-     * cart = {
-     *  1: 1 //제품 id, 카트에 담긴 제품 수
-     * }
-    */
-
-    if(req.cookies.cart) cart = req.cookies.cart;
-    else cart = {};
-
-    if(!cart[id]) cart[id] = 0;
-    cart[id] = parseInt(cart[id]) + 1;
-
-    res.cookie("cart", cart);
-    res.redirect("/cart");
-});
-
 app.get("/count", (req, res) => {
     let count;
-    if(req.cookies.count){
-        count = parseInt(req.cookies.count);
+    if(req.signedCookies.count){
+        count = parseInt(req.signedCookies.count);
     }else{
         count = 0;
     }
     count += 1;
 
-    res.cookie("count", count);
+    res.cookie("count", count, {signed: true});
     res.send("count: " + count);
 });
 
