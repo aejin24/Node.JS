@@ -1,11 +1,13 @@
-const express     = require("express");
-const session     = require("express-session");
-const MySQLStore  = require("express-mysql-session")(session);
+const express             = require("express");
+const session            = require("express-session");
+const MySQLStore         = require("express-mysql-session")(session);
+const bkfd2Password      = require("pbkdf2-password");
 
 const app = express();
+
 app.use(session({
     secret: "23423456325659562@!@#!@#",
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     store: new MySQLStore({
         host: "localhost",
@@ -15,49 +17,13 @@ app.use(session({
         database: "session_test"
     })
 }));
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/auth/logout", (req, res) => {
-    delete req.session.displayName;
-    res.session.save(() => { //데이터 store의 저장이 끝났을 때 인자로 전달한 함수를 콜백함수를 나중에 호출한다
-        res.redirect("/welcome");
-    });
-});
+const hasher = bkfd2Password();
+let users = [];
 
-app.get("/welcome", (req, res) => {
-    if(req.session.displayName){
-        res.send(`
-            <h1>Hello ${req.session.displayName}</h1>
-            <a href="/auth/logout">Logout</a>
-        `);
-    } else {
-        res.send(`
-            <h1>Welcome</h1>
-            <a href="/auth/login">Login</a>
-        `);
-    }
-});
-
-app.post("/auth/login", (req, res) => {
-    let user = {
-        username: "aejin",
-        password: "1224",
-        displayName: "AJ"
-    };
-    let uname = req.body.username;
-    let pwd = req.body.password;
-    
-    if(uname === user.username && pwd === user.password){
-        req.session.displayName = user.displayName;
-        req.session.save(() => {
-            res.redirect("/welcome");
-        })
-    }
-    else res.send("Who are you? <a href='/auth/login'>Login</a>")
-});
-
+/* LOGIN */
 app.get("/auth/login", (req, res) => {
     let output = `
         <h1>Login</h1>
@@ -71,9 +37,99 @@ app.get("/auth/login", (req, res) => {
             <p>
                 <input type="submit">
             </p>
+            <a href="/auth/register">Register</a>
         </form>
     `;
     res.send(output);
+});
+
+app.post("/auth/login", (req, res) => {
+    let uname = req.body.username;
+    let pwd = req.body.password;
+    
+    for(let i=0 ; i<users.length ; i++){
+        let user = users[i];
+        if(uname === user.username){
+            return hasher({password: pwd, salt: user.salt}, (err, pass, salt, hash) => {
+                if(hash == user.password){
+                    req.session.displayName = user.displayName;
+                    req.session.save(() => {
+                        res.redirect("/welcome");
+                    });
+                }else{
+                    res.send("Who are you? <a href='/auth/login'>Login</a>");
+                }
+            });
+        }
+    }
+});
+
+/* LOGOUT */
+app.get("/auth/logout", (req, res) => {
+    delete req.session.displayName;
+    req.session.save(() => {
+        res.redirect("/welcome");
+    });
+});
+
+/* REGISTER */
+app.get("/auth/register", (req, res) => {
+    let output = `
+        <h1>Register</h1>
+        <form action="/auth/register" method="POST">
+            <p>
+                <input type="text" name="username" placeholder="username">
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="password">
+            </p>
+            <p>
+                <input type="displayName" name="displayName" placeholder="displayName">
+            </p>
+            <p>
+                <input type="submit">
+            </p>
+        </form>
+    `;
+    res.send(output);
+});
+
+app.post("/auth/register", (req, res) => {
+    hasher({password: req.body.password}, (err, pass, salt, hash) => {
+        let user = {
+            username: req.body.username,
+            password: hash,
+            salt: salt,
+            displayName: req.body.displayName
+        };
+        users.push(user);
+        req.session.displayName = req.body.displayName;
+        req.session.save(() => {
+            res.redirect("/welcome");
+        });
+    });
+});
+
+/* WELCOME */
+app.get("/welcome", (req, res) => {
+    if(req.session.displayName){
+        res.send(`
+            <h1>Hello ${req.session.displayName}</h1>
+            <a href="/auth/logout">Logout</a>
+        `);
+    } else {
+        res.send(`
+            <h1>Unsigned User</h1>
+            <ul>
+                <li>
+                    <a href="/auth/login">Login</a>
+                </li>
+                <li>
+                    <a href="/auth/register">Register</a>
+                </li>
+            </ul>
+        `);
+    }
 });
 
 app.listen(5000, console.log("Running on 5000 Port"));
