@@ -74,12 +74,12 @@ passport.use(new LocalStrategy(
                         console.log("LocalStrategy", user);
                         done(null, user); //passport.serializeUser 실행
                     }else{
-                        done(null, false);
+                        done(null, false, {message: "Incorrect password"});
                     }
                 });
             }
         }
-        done(null, false);
+        done(null, false, {message: "Invalid User"});
     }
 ));
 
