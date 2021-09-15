@@ -6,3 +6,4 @@
 |09.14|express-session|app_session_couter.js / app_session_login.js|
 |09.14|express-mysql-session|app_session_mysql.js|
 |09.14|pbkdf2-password|app_session_mysql.js|
+|09.15|passport|app_passport.js|
