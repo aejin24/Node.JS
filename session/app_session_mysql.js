@@ -62,6 +62,7 @@ app.post("/auth/login", (req, res) => {
             });
         }
     }
+    res.send("Who are you? <a href='/auth/login'>Login</a>");
 });
 
 /* LOGOUT */
