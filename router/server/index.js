@@ -1,24 +1,15 @@
 const express = require("express");
 const http = require("http");
 
-const rMain = require("./router/mainRouter");
-const rSub = require("./router/subRouter");
-
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 const httpServer = http.createServer(app);
 
-const mainRouter = express.Router();
-const subRouter = express.Router();
+const routes = require("./router");
 
 app.use(express.urlencoded({ extended: true }));
+app.use(routes);
 
-app.use(mainRouter);
-app.use("/sub", subRouter);
-
-rMain.mainRouterProcessing(mainRouter);
-rSub.subRouterProcessing(subRouter);
-
-httpServer.listen(port, "0.0.0.0", () => {
+httpServer.listen(port, "127.0.0.1", () => {
     console.log(`Running on Port ${port}`); 
 });

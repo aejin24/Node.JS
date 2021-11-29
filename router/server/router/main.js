@@ -1,9 +1,11 @@
 const fs = require("fs");
 const httpStatusCodes = require("http-status-codes");
 
-const subRouterProcessing = (subRouter) => {
-    subRouter.get("/", (req, res) => {
-        fs.readFile("router/client/sub/index.html", null, (error, data) => {
+const clientPath = "router/client/";
+
+const mainRouter = (mainRouter) => {
+    mainRouter.get("/", (req, res) => {
+        fs.readFile(clientPath + "index.html", null, (error, data) => {
             if (error){
                 console.log(error);
             } else {
@@ -21,4 +23,4 @@ const subRouterProcessing = (subRouter) => {
     });
 }
 
-module.exports.subRouterProcessing = subRouterProcessing;
+module.exports.mainRouter = mainRouter;
