@@ -11,11 +11,12 @@
     "nodemon": "^2.0.15",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pbkdf2-password": "^1.2.1"
+    "pbkdf2-password": "^1.2.1",
+    "underscore": "^1.13.1"
   },
   "name": "node",
   "version": "1.0.0",
-  "description": "",
+  "description": "server side js tutorial",
   "main": "router/server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

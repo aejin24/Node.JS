@@ -1,6 +1,5 @@
 ### Node.JS 개인공부
 ---
-<br>
 
 ### 2021
 |DATE|Module Name|File Name|
@@ -17,4 +16,5 @@
 ### 2022
 |DATE|Module Name|Directory Name|
 |----|----|---|
-|01.05|uglify-js|base|
+|01.05|uglify-js|base/uglify-js|
+|01.06|underscore|base/underscore|
