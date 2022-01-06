@@ -17,4 +17,4 @@
 |DATE|Module Name|Directory Name|
 |----|----|---|
 |01.05|uglify-js|base/uglify-js|
-|01.06|underscore|base/underscore|
+|01.06|underscorejs|base/underscore|
