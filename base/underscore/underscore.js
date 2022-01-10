@@ -1,5 +1,5 @@
-const underscore = require("underscore");
+const _ = require("underscore");
 
 var arr = [3, 6, 9, 1, 12]
-console.log(underscore.first(arr))
-console.log(underscore.last(arr))
+console.log(_.first(arr))
+console.log(_.last(arr))
