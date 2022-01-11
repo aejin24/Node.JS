@@ -1,0 +1,15 @@
+// 줄 바꿈을 하면 새로운 태그가 시작된다는 의미
+
+html
+    head
+        title= _title
+    body
+        h1 Hello Jade
+        
+        ul
+            // jade는 js를 인식하기 위해 앞에 대쉬(-)를 붙여야한다
+            -for (var i =0 ; i<5 ; i++)
+                li coding
+        
+        // variable 형식은 jade에서 쓰이는 변수인데 이 변수는 서버에서 내려주는 값이 들어간다
+        div= time
