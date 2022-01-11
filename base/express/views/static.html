@@ -15,5 +15,16 @@
       <li>coding</li>
       <li>coding</li>
     </ul>
+
+    <p id="name"></p>
+    <p id="age"></p>
+
+    <script type="application/javascript">
+      const name = "<%= name %>";
+      const age = "<%= age %>";
+
+      document.getElementById("name").innerText = name;
+      document.getElementById("age").innerText = age;
+    </script>
   </body>
 </html>
