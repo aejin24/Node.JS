@@ -22,7 +22,7 @@
   "main": "router/server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon router/server/index.js"
+    "start": "nodemon base/express/app.js"
   },
   "author": "",
   "license": "ISC"

@@ -56,6 +56,41 @@ app.get("/static", (req, res) => {
     })
 });
 
+app.get("/topic", (req, res) => {
+    var topics = ["Javascript Is...", "NodeJS Is...", "Express Is"];
+
+    // queryString은 req.query로 받아온다
+    var output = `
+        <a href="/topic?id=0">JavaScript</a>
+        <br>
+        <a href="/topic?id=1">NodeJS</a>
+        <br>
+        <a href="/topic?id=2">Express</a>
+        <br><br>
+        <h1>${topics[req.query.id]}</h1>
+    `
+
+    res.send(output);
+});
+
+
+app.get("/param/:id/:mode", (req, res) => {
+    var topics = ["Javascript Is...", "NodeJS Is...", "Express Is"];
+
+    // 시멘틱 url의 param은 req.params로 받아온다
+    var output = `
+        <a href="/topic/0">JavaScript</a>
+        <br>
+        <a href="/topic/1">NodeJS</a>
+        <br>
+        <a href="/topic/2">Express</a>
+        <br><br>
+        <h1>${topics[req.params.id]}, ${req.params.mode}</h1>
+    `
+
+    res.send(output);
+});
+
 app.listen(3000, () => {
     console.log("Connected 3000 port");
 });

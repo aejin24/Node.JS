@@ -22,3 +22,4 @@
 |01.10|express|base/express|
 |01.11|jade template engine|base/express/app_jade.js|
 |01.11|html template engine|base/express/app.js|
+|01.12|queryString, semantic url|base/express/app.js|
