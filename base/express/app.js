@@ -3,8 +3,11 @@ const app = express();
 
 app.locals.pretty = true;
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true })); // post로 넘겨온 값을 받기 위해 body에 있는 json을 사용할 수 있도록 설정해야한다
+app.use(express.json());
 
 app.engine("html", require("ejs").renderFile);
+app.set("views", __dirname + "/views"); 
 app.set("view engine", "html");
 
 app.get("/", (req, res) => {
@@ -89,6 +92,24 @@ app.get("/param/:id/:mode", (req, res) => {
     `
 
     res.send(output);
+});
+
+app.get("/form", (req, res) => {
+    res.render("form.html")
+});
+
+app.get("/form_receiver", (req, res) => {
+    var title = req.query.title;
+    var description = req.query.description;
+
+    res.send(title + ", " + description)
+});
+
+app.post("/form_receiver", (req, res) => {
+    var title = req.body.title;
+    var description = req.body.description;    
+
+    res.send(title + ", " + description)
 });
 
 app.listen(3000, () => {
