@@ -1,0 +1,14 @@
+{
+    "presets": ["@babel/preset-env"],
+    "plugins": [ // jsconfig 에서 설정한 경로를 컴파일 후에도 올바르게 파싱해주는 역할
+        [
+            "module-resolver",
+            {
+                "root": "./babel",
+                "alias": {
+                    "@constant": "./babel/constant"
+                }
+            }
+        ]
+    ]
+}
