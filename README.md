@@ -25,3 +25,4 @@
 |01.12|queryString, semantic url|base/express/app.js|
 |01.13|get, post|base/express/app.js|
 |01.14|web application|base/webapp|
+|02.24|babel|babel|
