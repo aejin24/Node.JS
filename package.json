@@ -36,7 +36,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "preset": "tsc",
     "start": "npm run preset & node application/dist",
-    "dev": "nodemon --exec ts-node middleware/index.ts"
+    "dev": "nodemon --exec ts-node middleware/applicationLevel.ts"
   },
   "author": "",
   "license": "ISC"
