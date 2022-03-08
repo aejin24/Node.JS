@@ -13,5 +13,8 @@ app.set("views", __dirname + "/../views");
 app.get("/", (req, res, next) => {
     res.render("main", { _desc: "Hello Typescript" });
 });
+app.use(((err, req, res, next) => {
+    res.status(500).send("Somthing broken!");
+}));
 app.listen(PORT, () => console.log("Running on TS-Express Server"))
     .on("error", (err) => { throw new Error(`${err.name}: ${err.message}`); });
