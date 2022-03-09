@@ -17,7 +17,9 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
     console.log("before render22");
     next();
     // next(Error); // "route" 이외의 것을 넣는다면 아래에 작성된 미들웨어는 무시가 되고 에러처리 미들웨어로 이동하게 된다
-}, (req: Request, res: Response, next: NextFunction) => {
+});
+
+app.get("/", (req: Request, res: Response, next: NextFunction) => {
     console.log("after render");
     res.send(req.requestTime);
 });
