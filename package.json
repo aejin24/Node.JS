@@ -34,9 +34,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preset": "tsc",
-    "start": "npm run preset & node application/dist",
-    "dev": "nodemon --exec ts-node middleware/routerLevel.ts"
+    "dev": "nodemon --exec ts-node application/index.ts"
   },
   "author": "",
   "license": "ISC"
