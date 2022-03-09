@@ -1,5 +1,5 @@
 ## Node.JS 개인공부
-[NodeJS 블로그](https://www.notion.so/Node-js-6157bb10388d4246ad6694f12ad1ca55)
+[NodeJS 블로그](https://velog.io/@aejin24/series/Node.js)
 
 |Directory|Description|
 |---|---|
