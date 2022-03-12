@@ -5,4 +5,11 @@ html
         title Typescript Application
 
     body
-        p #{_desc}
+        h1 LOGIN
+
+        form(action="/auth/login" method="post")
+            input(type="text" name="email" placeholder="email")
+            br
+            input(type="text" name="password" placeholder="password")
+            br
+            button submit
