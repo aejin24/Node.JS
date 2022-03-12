@@ -1,11 +1,12 @@
-import express, { Request, Response, NextFunction, ErrorRequestHandler } from "express";
+import express, { Request, Response } from "express";
+
 import { Error } from "interfaces/render";
 import { UserModel } from "interfaces/router";
 import { authData } from "../const";
 
 const authRouter = express.Router();
 
-authRouter.post("/login", (req: Request, res: Response, next: NextFunction) => {
+authRouter.post("/login", (req: Request, res: Response) => {
     const reqBody = req.body as UserModel;
 
     if (reqBody.email === authData.email && reqBody.password === authData.password) {
@@ -18,9 +19,5 @@ authRouter.post("/login", (req: Request, res: Response, next: NextFunction) => {
         } as Error );
     }
 });
-
-authRouter.use(((err, req, res, next) => {
-    res.status(500).send(err);
-}) as ErrorRequestHandler);
 
 export default authRouter;

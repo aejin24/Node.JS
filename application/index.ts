@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 
 import { PORT } from "./const";
-import { authRouter, mainRouter } from "./routers";
+import rootRouter from "./routers";
 
 dotenv.config();
 
@@ -14,10 +14,8 @@ app.set("views", __dirname + "\\views");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/", mainRouter);
-app.use("/auth", authRouter);
+app.use("/", rootRouter);
 
-app.listen(PORT, () => console.log("Running on TS-Express Server"))
-    .on("error", (err) => {
-        throw new Error(`${err.name}: ${err.message}`) 
+app.listen(PORT, () => console.log("Running on TS-Express Server")).on("error", (err) => {
+        throw new Error(`${err.name}: ${err.message}`);
     });

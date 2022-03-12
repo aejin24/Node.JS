@@ -1,13 +1,9 @@
-import express, { Request, Response, NextFunction, ErrorRequestHandler } from "express";
+import express, { Request, Response, NextFunction } from "express";
 
 const mainRouter = express.Router();
 
-mainRouter.get("/", (req: Request, res: Response, next: NextFunction) => {
-    res.render("main");
+mainRouter.get("/", (req: Request, res: Response) => {
+    res.send("login success");
 });
 
-mainRouter.use(((err, req, res, next) => {
-    res.status(500).send(err);
-}) as ErrorRequestHandler);
-  
 export default mainRouter;
