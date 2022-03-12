@@ -1,5 +1,4 @@
-## Node.JS 개인공부
-[NodeJS 블로그](https://velog.io/@aejin24/series/Node.js)
+## Node.JS 개인공부 ([공부 정리 블로그](https://velog.io/@aejin24/series/Node.js))
 
 |Directory|Description|
 |---|---|
