@@ -1,24 +1,19 @@
-import express, { ErrorRequestHandler, Request, Response, NextFunction } from "express";
+import express from "express";
 import dotenv from "dotenv";
-import { Main } from "@interface/render";
-import { StringOrNumber } from "@customTypes/union";
 
-dotenv.config({path: __dirname + "\\.env"});
+import { PORT } from "./const";
+import { mainRouter } from "./routers";
 
-const PORT: StringOrNumber = process.env.PORT || 3000;
+dotenv.config();
 
 const app: express.Application = express();
 
 app.set("view engine", "pug");
 app.set("views", __dirname + "\\views");
 
-app.get("/", (req: Request, res: Response, next: NextFunction) => {
-    res.render("main", { _desc: "Hello Typescript" } as Main);
-});
-
-app.use(((err, req, res, next) => {
-    res.status(500).send(err.message);
-}) as ErrorRequestHandler);
+app.use("/", mainRouter);
 
 app.listen(PORT, () => console.log("Running on TS-Express Server"))
-    .on("error", (err) => { throw new Error(`${err.name}: ${err.message}`) });
+    .on("error", (err) => {
+        throw new Error(`${err.name}: ${err.message}`) 
+    });
