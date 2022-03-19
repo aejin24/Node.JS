@@ -1,4 +1,4 @@
-## Node.JS 개인공부 ([공부 정리 블로그](https://velog.io/@aejin24/series/Node.js))
+## Node.JS 개인공부 ([BLOG](https://guiltless-slug-fcb.notion.site/Node-js-6157bb10388d4246ad6694f12ad1ca55))
 
 |Directory|Description|
 |---|---|
