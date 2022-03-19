@@ -6,7 +6,7 @@ import mainRouter from "./main";
 const rootRouter = express.Router();
 
 rootRouter.get("/", (req: Request, res: Response) => {
-    res.render("main");
+    res.render("login");
 });
 
 rootRouter.use("/auth", authRouter);
