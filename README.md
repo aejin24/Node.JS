@@ -1,4 +1,4 @@
-## Node.JS 개인공부 ([BLOG](https://guiltless-slug-fcb.notion.site/Node-js-6157bb10388d4246ad6694f12ad1ca55))
+## Node.JS 개인공부
 
 |Directory|Description|
 |---|---|
