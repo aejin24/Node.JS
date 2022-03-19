@@ -12,18 +12,20 @@ authRouter.post("/login", (req: Request, res: Response, next: NextFunction) => {
     if (reqBody.email === authData.email && reqBody.password === authData.password) {
         res.redirect("/main");
     } else {
-        res.render("error", {
-            _error: "Please Retry!!",
-            moveTo: "LOGIN",
-            path: "/"
-        } as ErrorModel );
-
         next(Error);
     }
 });
 
 authRouter.use(((err, req, res, next) => {
-    console.log("Error: Check authData and requestData match");
+    let _error: string = "";
+
+    if (res.statusCode === 404) {
+        _error = "Page Not Found";
+    } else {
+        _error = "Something Broken!!";
+    }
+
+    res.render("error", { _error: _error, moveTo: "LOGIN", path: "/" } as ErrorModel );
 }) as ErrorRequestHandler);
 
 export default authRouter;
