@@ -3,10 +3,28 @@ html
     head
         meta(charset="utf-8")
         title Typescript Application
-        link(rel="stylesheet", href="/main.css")
+        link(rel="stylesheet", href="/css/main.css")
 
     body
         h1 Web
         ul
             each d in _data
                 li.text #{d}
+
+        div.wrap
+            button#create CREATE
+            button#delete DELETE
+
+        div(data-form="create")
+            h3 CREATE
+            form(action="/user/create" method="post")
+                input(type="text" name="email" placeholder="email")
+                button submit
+
+        div(data-form="delete")
+            h3 DELETE
+            form(action="/user/delete" method="post")
+                input(type="text" name="email" placeholder="email")
+                button submit
+    
+    script(type="text/javascript", src="/js/main.js")
