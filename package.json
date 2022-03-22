@@ -32,7 +32,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec ts-node application/index.ts"
+    "dev": "nodemon --exec ts-node application\\index.ts"
   },
   "author": "",
   "license": "ISC"
