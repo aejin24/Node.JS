@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction, ErrorRequestHandler } from "express";
-import { readFileSync } from "fs";
+import { readdirSync } from "fs";
 
 import { ErrorModel } from "interfaces/render";
 import { staticDataPath } from "../const";
@@ -8,9 +8,9 @@ const mainRouter = express.Router();
 
 mainRouter.get("/", (req: Request, res: Response, next: NextFunction) => {
     try {
-        const data = readFileSync(staticDataPath, "utf8").toString().split("\n");
+        const datas = readdirSync(staticDataPath, "utf8").toString().split(",");
 
-        res.render("main", { _data: data});
+        res.render("main", { _data: datas });
     } catch (error) {
         console.log(error);
         next(Error);

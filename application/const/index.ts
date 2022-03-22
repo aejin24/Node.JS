@@ -10,4 +10,4 @@ export const authData: AuthData = {
     password: "1224"
 }
 
-export const staticDataPath: string = path.join(__dirname, "..", "public\\data.txt");
+export const staticDataPath: string = path.join(__dirname, "..", "public\\data\\");

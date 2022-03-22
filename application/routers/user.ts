@@ -1,11 +1,32 @@
 import express, { Request, Response, NextFunction, ErrorRequestHandler } from "express";
+import { writeFileSync, unlinkSync } from "fs";
 
 import { ErrorModel } from "interfaces/render";
+import { CreateDeleteRequest } from "interfaces/router";
+import { staticDataPath } from "../const";
 
 const userRouter = express.Router();
 
-userRouter.get("/", (req: Request, res: Response, next: NextFunction) => {
+userRouter.post("/create", (req: Request, res: Response, next: NextFunction) => {
+    const reqBody = req.body as CreateDeleteRequest;
 
+    try {
+        writeFileSync(staticDataPath + reqBody.email, reqBody.email);
+        res.redirect("/main");
+    } catch (error) {
+        next(Error);
+    }
+});
+
+userRouter.post("/delete", (req: Request, res: Response, next: NextFunction) => {
+    const reqBody = req.body as CreateDeleteRequest;
+
+    try {
+        unlinkSync(staticDataPath + reqBody.email);
+        res.redirect("/main");
+    } catch (error) {
+        next(Error);
+    }
 });
 
 userRouter.use(((err, req, res, next) => {
