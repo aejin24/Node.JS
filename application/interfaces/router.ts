@@ -8,6 +8,5 @@ export interface CreateDeleteRequest {
 }
 
 export interface UpdateRequest {
-    oldEmail: string
-    newEmail: string
+    new: string
 }
