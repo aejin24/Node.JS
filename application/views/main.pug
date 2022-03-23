@@ -9,7 +9,8 @@ html
         h1 Web
         ul
             each d in _data
-                li.text #{d}
+                li.text 
+                    a(href=`/main/${d}`) #{d}
 
         div.wrap
             button#create CREATE
@@ -19,12 +20,26 @@ html
             h3 CREATE
             form(action="/user/create" method="post")
                 input(type="text" name="email" placeholder="email")
+                br
                 button submit
 
         div(data-form="delete")
             h3 DELETE
             form(action="/user/delete" method="post")
                 input(type="text" name="email" placeholder="email")
+                br
                 button submit
+
+        if _desc
+            br
+            h3 #{_desc}
+            button#update UPDATE
+
+            div(data-form="update")
+                h3 UPDATE
+                form(action="/user/update" method="post")
+                    input(type="text" name="new" placeholder="new email")
+                    br
+                    button submit
     
     script(type="text/javascript", src="/js/main.js")
