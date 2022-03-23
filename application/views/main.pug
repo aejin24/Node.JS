@@ -37,7 +37,7 @@ html
 
             div(data-form="update")
                 h3 UPDATE
-                form(action="/user/update" method="post")
+                form(action=`/user/update/${_desc}` method="post")
                     input(type="text" name="new" placeholder="new email")
                     br
                     button submit

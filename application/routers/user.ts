@@ -29,6 +29,12 @@ userRouter.post("/delete", (req: Request, res: Response, next: NextFunction) => 
     }
 });
 
+userRouter.post("/update/:email", (req: Request, res: Response, next: NextFunction) => {
+    let reqParams = req.params as unknown as CreateDeleteRequest;
+
+    console.log(reqParams)
+});
+
 userRouter.use(((err, req, res, next) => {
     let _error: string = "";
 
