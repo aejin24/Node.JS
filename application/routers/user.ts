@@ -34,8 +34,8 @@ userRouter.post("/update/:email", (req: Request, res: Response, next: NextFuncti
     const reqBody = req.body as UpdateRequest;
 
     try {
-        renameSync(staticDataPath + reqParams.email, staticDataPath + reqBody.new);
         writeFileSync(staticDataPath + reqParams.email, reqBody.new, "utf8");
+        renameSync(staticDataPath + reqParams.email, staticDataPath + reqBody.new);
 
         res.redirect("/main");
     } catch (error) {
@@ -44,6 +44,7 @@ userRouter.post("/update/:email", (req: Request, res: Response, next: NextFuncti
 });
 
 userRouter.use(((err, req, res, next) => {
+    console.log(err);
     let _error: string = "";
 
     if (res.statusCode === 404) {
