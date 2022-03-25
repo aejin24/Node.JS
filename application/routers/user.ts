@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction, ErrorRequestHandler } from "express";
-import { writeFileSync, unlinkSync, readFileSync } from "fs";
+import { writeFileSync, unlinkSync, rename } from "fs";
 
 import { ErrorModel } from "interfaces/render";
 import { CreateDeleteRequest, UpdateRequest } from "interfaces/router";
@@ -34,6 +34,10 @@ userRouter.post("/update/:email", (req: Request, res: Response, next: NextFuncti
     const reqBody = req.body as UpdateRequest;
 
     try {
+        rename(staticDataPath + reqParams.email, staticDataPath + reqBody.new, (err) => {
+            if (err) next(Error);
+        });
+
         writeFileSync(staticDataPath + reqParams.email, reqBody.new, "utf8");
         res.redirect("/main");
     } catch (error) {
